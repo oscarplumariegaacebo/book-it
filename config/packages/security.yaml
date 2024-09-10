@@ -17,7 +17,17 @@ security:
             lazy: true
             provider: app_user_provider
             http_basic: ~
+            form_login:
+                login_path: app_login
+                check_path: app_login
+                enable_csrf: true
+            logout:
+                path: app_logout
+                # where to redirect after logout
+                # target: app_any_route
 
+            # configure the form authentication as the entry point for unauthenticated users
+            entry_point: form_login
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
 
