@@ -51,4 +51,8 @@
 # Embedded web-server pid file
 /.web-server-pid
 
+/.env.local.php
+/.env.local
+/.env.*.local
+/.env
 .env
