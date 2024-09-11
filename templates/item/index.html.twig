@@ -15,6 +15,7 @@
                 <th>T_preparation</th>
                 <th>Ingredients</th>
                 <th>Meat_cooked</th>
+                <th>Id Company</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -28,6 +29,7 @@
                 <td>{{ item.tPreparation }}</td>
                 <td>{{ item.ingredients ? item.ingredients|json_encode : '' }}</td>
                 <td>{{ item.meatCooked }}</td>
+                <td>{{ item.idCompany }}</td>
                 <td>
                     <a href="{{ path('app_item_show', {'id': item.id}) }}">show</a>
                     <a href="{{ path('app_item_edit', {'id': item.id}) }}">edit</a>

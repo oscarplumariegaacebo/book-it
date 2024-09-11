@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Item;
 use App\Entity\Company;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,13 +19,9 @@ class ListController extends AbstractController
         ]);
     }*/
 
-    #[Route('/list', name: 'app_list', methods: ['GET', 'POST'])]
-    public function connection(EntityManagerInterface $entityManager){
-        $list = $entityManager->getRepository(Company::class)->findAll();
-        //$list = $entityManager->getRepository(Company::class)->findBy(array('id' => 1));
-        return $this->render('list/index.html.twig', [
-            'controller_name' => 'Catálogo',
-            'companies' => $list
-        ]);
+    #[Route('/list/{id}', name: 'app_list', methods: ['GET', 'POST'])]
+    public function index(EntityManagerInterface $entityManager, int $id): Response{
+        $list = $entityManager->getRepository(Item::class)->findBy(array('idCompany' => $id));
+        return $this->json($list);
     }
 }

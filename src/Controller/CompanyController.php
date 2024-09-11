@@ -14,12 +14,14 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/company')]
 final class CompanyController extends AbstractController
 {
-    #[Route(name: 'app_company_index', methods: ['GET'])]
+    #[Route(path: '/all', name: 'app_company_index', methods: ['GET'])]
     public function index(CompanyRepository $companyRepository): Response
     {
-        return $this->render('company/index.html.twig', [
+        $companies = $companyRepository->findAll();
+        /*return $this->render('company/index.html.twig', [
             'companies' => $companyRepository->findAll(),
-        ]);
+        ]);*/
+        return $this->json($companies);
     }
 
     #[Route('/new', name: 'app_company_new', methods: ['GET', 'POST'])]
@@ -45,9 +47,10 @@ final class CompanyController extends AbstractController
     #[Route('/{id}', name: 'app_company_show', methods: ['GET'])]
     public function show(Company $company): Response
     {
-        return $this->render('company/show.html.twig', [
+        /*return $this->render('company/show.html.twig', [
             'company' => $company,
-        ]);
+        ]);*/
+        return $this->json($company);
     }
 
     #[Route('/{id}/edit', name: 'app_company_edit', methods: ['GET', 'POST'])]

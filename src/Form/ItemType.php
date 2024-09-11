@@ -18,6 +18,7 @@ class ItemType extends AbstractType
             ->add('t_preparation')
             ->add('ingredients')
             ->add('meat_cooked')
+            ->add('idCompany')
         ;
     }
 

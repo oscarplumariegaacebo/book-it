@@ -25,8 +25,11 @@ class Item
     #[ORM\Column(nullable: true)]
     private ?int $t_preparation = null;
 
+    #[ORM\Column]
+    private ?int $idCompany = null;
+
     #[ORM\Column(nullable: true)]
-    private ?array $ingredients = null;
+    private ?string $ingredients = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $meat_cooked = null;
@@ -44,6 +47,18 @@ class Item
     public function setName(string $name): static
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getIdCompany(): ?int
+    {
+        return $this->idCompany;
+    }
+
+    public function setIdCompany(int $idCompany): static
+    {
+        $this->idCompany = $idCompany;
 
         return $this;
     }
@@ -84,12 +99,12 @@ class Item
         return $this;
     }
 
-    public function getIngredients(): ?array
+    public function getIngredients(): ?string
     {
         return $this->ingredients;
     }
 
-    public function setIngredients(?array $ingredients): static
+    public function setIngredients(?string $ingredients): static
     {
         $this->ingredients = $ingredients;
 
