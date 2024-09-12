@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/company')]
 final class CompanyController extends AbstractController
 {
-    #[Route(path: '/all', name: 'app_company_index', methods: ['GET'])]
+    #[Route(path: '/list', name: 'app_company_index', methods: ['GET'])]
     public function index(CompanyRepository $companyRepository): Response
     {
         $companies = $companyRepository->findAll();
