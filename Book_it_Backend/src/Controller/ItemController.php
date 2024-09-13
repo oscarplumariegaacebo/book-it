@@ -14,12 +14,12 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/item')]
 final class ItemController extends AbstractController
 {
-    #[Route(name: 'app_item_index', methods: ['GET'])]
-    public function index(ItemRepository $itemRepository): Response
+    #[Route(path: '/list/{id}', methods: ['GET'])]
+    public function index(int $id, ItemRepository $itemRepository): Response
     {
-        return $this->render('item/index.html.twig', [
-            'items' => $itemRepository->findAll(),
-        ]);
+        $items = $itemRepository->findBy(array('idCompany' => $id));
+
+        return $this->json($items);
     }
 
     #[Route('/new', name: 'app_item_new', methods: ['GET', 'POST'])]

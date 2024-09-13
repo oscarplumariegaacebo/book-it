@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/company')]
 final class CompanyController extends AbstractController
 {
-    #[Route(path: '/list', name: 'app_company_index', methods: ['GET'])]
+    #[Route(path: '/list', methods: ['GET'])]
     public function index(CompanyRepository $companyRepository): Response
     {
         $companies = $companyRepository->findAll();
@@ -22,6 +22,16 @@ final class CompanyController extends AbstractController
             'companies' => $companyRepository->findAll(),
         ]);*/
         return $this->json($companies);
+    }
+
+    #[Route(path: '/getIdCompanyByName/{name}', methods: ['GET'])]
+    public function idByName(string $name, CompanyRepository $companyRepository): Response
+    {
+        $company = $companyRepository->findBy(array('name' => $name));
+        /*return $this->render('company/index.html.twig', [
+            'companies' => $companyRepository->findAll(),
+        ]);*/
+        return $this->json($company[0]->getId());
     }
 
     #[Route('/new', name: 'app_company_new', methods: ['GET', 'POST'])]
