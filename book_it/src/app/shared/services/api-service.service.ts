@@ -13,4 +13,10 @@ export class ApiService {
   getCompanies(){
     return this.http.get(this.api + '/company/list');
   }
+  getIdCompanyByName(name:string){
+    return this.http.get(this.api + '/company/getIdCompanyByName/'+name);
+  }
+  getItemsByCompanyId(id:number){
+    return this.http.get(this.api + '/item/list/'+id);
+  }
 }
