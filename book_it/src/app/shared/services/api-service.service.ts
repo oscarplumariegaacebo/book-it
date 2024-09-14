@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class ApiService {
 
   private readonly api = 'http://127.0.0.1:8000';
 
-  getCompanies(){
+  getCompanies(): Observable<any>{
     return this.http.get(this.api + '/company/list');
   }
   getIdCompanyByName(name:string){

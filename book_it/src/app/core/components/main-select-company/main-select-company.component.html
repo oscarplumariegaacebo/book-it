@@ -1,3 +1,6 @@
+@if(!loading){
+  <app-spinner-loading></app-spinner-loading>
+}
 <div class="text-8xl font-bold text-center pb-10">¡Reserva y recoge tu mejor pedido!</div>
 <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
     @for (c of companies; track c.id) {
