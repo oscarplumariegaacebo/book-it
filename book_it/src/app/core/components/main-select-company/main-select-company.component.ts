@@ -20,11 +20,10 @@ export class MainSelectCompanyComponent {
 
   ngOnInit() {
     this.apiService.getCompanies().subscribe((companies:any) => {
-      setTimeout(() => {
+      if(companies != undefined){
         this.loading = true;
         this.companies = companies;
-      })
-
+      }
     })
   }
 
