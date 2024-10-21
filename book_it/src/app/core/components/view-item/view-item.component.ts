@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ApiService } from '../../../shared/services/api-service.service';
 import { SpinnerLoadingComponent } from '../../../shared/components/spinner-loading/spinner-loading.component';
+import { ItemsService } from '../../../shared/services/items.service';
+import { CompaniesService } from '../../../shared/services/companies.service';
 
 @Component({
   selector: 'app-view-item',
@@ -14,15 +15,17 @@ export class ViewItemComponent {
   company: string = '';
   items: Array<any> = [];
   loading: boolean = false;
+  itemsService = inject(ItemsService);
+  companiesService = inject(CompaniesService);
 
-  constructor(private apiService: ApiService, private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
     let name = this.route.snapshot.paramMap.get('company')!;
     this.company = name;
 
-    this.apiService.getIdCompanyByName(name).subscribe((id: any) => {
-      this.apiService.getItemsByCompanyId(id).subscribe((items: any) => {
+    this.companiesService.getIdCompanyByName(name).subscribe((id: any) => {
+      this.itemsService.getItemsByCompanyId(id).subscribe((items: any) => {
         if(items != undefined) {
           this.items = items;
           this.loading = true;
