@@ -40,6 +40,9 @@ class Company
     #[ORM\Column(length: 200, nullable: true)]
     private ?string $logo = null;
 
+    #[ORM\Column]
+    private ?int $category = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -149,6 +152,18 @@ class Company
     public function setLogo(?string $logo): static
     {
         $this->logo = $logo;
+
+        return $this;
+    }
+
+    public function getCategory(): ?int
+    {
+        return $this->category;
+    }
+
+    public function setCategory(int $category): static
+    {
+        $this->category = $category;
 
         return $this;
     }
