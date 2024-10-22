@@ -20,6 +20,7 @@ class CompanyType extends AbstractType
             ->add('city')
             ->add('phoneNumber')
             ->add('email')
+            ->add('category')
         ;
     }
 

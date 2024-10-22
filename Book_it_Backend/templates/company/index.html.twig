@@ -17,6 +17,7 @@
                 <th>City</th>
                 <th>PhoneNumber</th>
                 <th>Email</th>
+                <th>Category</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -32,6 +33,7 @@
                 <td>{{ company.city }}</td>
                 <td>{{ company.phoneNumber }}</td>
                 <td>{{ company.email }}</td>
+                <td>{{ company.category }}</td>
                 <td>
                     <a href="{{ path('app_company_show', {'id': company.id}) }}">show</a>
                     <a href="{{ path('app_company_edit', {'id': company.id}) }}">edit</a>
