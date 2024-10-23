@@ -1,0 +1,8 @@
+.container{
+    min-width: 100%;
+    background-image: url("https://res.cloudinary.com/dpi7a97tg/image/upload/v1729689234/photo-1528164344705-47542687000d_hua6gh.jpg");
+    background-size: cover;
+}
+.main{
+    max-width: 80%;
+}

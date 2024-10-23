@@ -18,7 +18,7 @@ export class MainSelectCompanyComponent {
   companiesService = inject(CompaniesService);
   bcService = inject(BusinessCategoriesService);
   businessCategories: any = [];
-  loading:boolean = true;
+  loading:boolean = false;
   companiesList: any = [];
   allCompanies: any = [];
 
@@ -45,5 +45,12 @@ export class MainSelectCompanyComponent {
 
   selectCompany(name: string){
     this.router.navigate(['menu',name]);
+  }
+
+  filterByCategory(category: number){
+    this.companiesService.getCompanyByCategory(category).subscribe((companies:any) => {
+      this.loading = true;
+      this.updateItems(companies);
+    })
   }
 }

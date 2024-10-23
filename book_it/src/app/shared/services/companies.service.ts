@@ -17,4 +17,7 @@ export class CompaniesService {
   getIdCompanyByName(name:string){
     return this.http.get(this.api + '/company/getIdCompanyByName/'+name);
   }
+  getCompanyByCategory(category:number){
+    return this.http.get(this.api + '/company/listByCategory/'+category);
+  }
 }
