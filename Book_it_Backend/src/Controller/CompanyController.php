@@ -24,6 +24,16 @@ final class CompanyController extends AbstractController
         return $this->json($companies);
     }
 
+    #[Route(path: '/listByCategory/{id}', methods: ['GET'])]
+    public function companiesByCategory(int $id, CompanyRepository $companyRepository): Response
+    {
+        $companies = $companyRepository->findBy(array('category' => $id));
+        /*return $this->render('company/index.html.twig', [
+            'companies' => $companyRepository->findAll(),
+        ]);*/
+        return $this->json($companies);
+    }
+
     #[Route(path: '/getIdCompanyByName/{name}', methods: ['GET'])]
     public function idByName(string $name, CompanyRepository $companyRepository): Response
     {
