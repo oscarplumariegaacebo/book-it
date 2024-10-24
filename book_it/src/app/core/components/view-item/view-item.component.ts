@@ -1,24 +1,28 @@
 import { Component, inject, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SpinnerLoadingComponent } from '../../../shared/components/spinner-loading/spinner-loading.component';
 import { ItemsService } from '../../../shared/services/items.service';
 import { CompaniesService } from '../../../shared/services/companies.service';
+import { PaginatorComponent } from '../../../shared/components/paginator/paginator.component';
 
 @Component({
   selector: 'app-view-item',
   standalone: true,
-  imports: [SpinnerLoadingComponent],
+  imports: [SpinnerLoadingComponent, PaginatorComponent],
   templateUrl: './view-item.component.html',
   styleUrl: './view-item.component.css'
 })
 export class ViewItemComponent {
+  @Input() items: any;
+
   company: string = '';
-  items: Array<any> = [];
+  allItems: any = [];
+  itemsList: any = [];
   loading: boolean = false;
   itemsService = inject(ItemsService);
   companiesService = inject(CompaniesService);
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     let name = this.route.snapshot.paramMap.get('company')!;
@@ -27,10 +31,21 @@ export class ViewItemComponent {
     this.companiesService.getIdCompanyByName(name).subscribe((id: any) => {
       this.itemsService.getItemsByCompanyId(id).subscribe((items: any) => {
         if(items != undefined) {
-          this.items = items;
           this.loading = true;
+          this.itemsList = items;
+          this.allItems = items;
+          this.items = items.slice(0,10);
         }
       })
     })
+  }
+
+  updateItems(items: any){
+    this.itemsList = items;
+    this.items = items;
+  }
+
+  returnPage(){
+    this.router.navigate(['']);
   }
 }

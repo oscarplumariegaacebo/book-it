@@ -40,6 +40,7 @@ export class MainSelectCompanyComponent {
   }
 
   updateItems(companies: any){
+    this.companiesList = companies;
     this.companies = companies;
   }
 
@@ -48,9 +49,13 @@ export class MainSelectCompanyComponent {
   }
 
   filterByCategory(category: number){
-    this.companiesService.getCompanyByCategory(category).subscribe((companies:any) => {
-      this.loading = true;
-      this.updateItems(companies);
-    })
+    if(category === 5){
+      this.updateItems(this.allCompanies);
+    }else{
+      this.companiesService.getCompanyByCategory(category).subscribe((companies:any) => {
+        this.loading = true;
+        this.updateItems(companies);
+      })
+    }
   }
 }
